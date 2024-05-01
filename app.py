@@ -8,7 +8,7 @@ file = os.path.join(dirname, filename)
 
 df = pd.read_csv(file)
 
-
+df = df.replace({'yes':1, 'no':0, '?':'Others', 'others':'Others', 'YES':1, 'NO':0})
 for col in df.columns:
     if df[col].isnull().sum() > 0:
         if df[col].dtype == 'float64':
@@ -16,7 +16,8 @@ for col in df.columns:
             df[col] = df[col].fillna(val)
         else:
             df = df.dropna(subset=df.select_dtypes(include=['object']).columns)
-
+df.drop(df[df['age']>100].index, inplace=True)
+df.drop(df[df['age']<=0].index, inplace=True)
 dire = 'ndata'
 location = 'autism_screening'
 filename = os.path.join(dire, f'{location}.csv')
