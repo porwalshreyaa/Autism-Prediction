@@ -19,8 +19,8 @@ for col in df.columns:
 df.drop(df[df['age']>100].index, inplace=True)
 df.drop(df[df['age']<=0].index, inplace=True)
 dire = 'ndata'
-location = 'autism_screening'
-filename = os.path.join(dire, f'{location}.csv')
+name = 'autism_screening'
+filename = os.path.join(dire, f'{name}.csv')
 df.to_csv(filename, index=False)
-print(f'Saved data for location {location} to file {filename}')
+print(f'Saved data for location {name} to file {filename}')
 
